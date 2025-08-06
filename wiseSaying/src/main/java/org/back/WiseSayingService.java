@@ -1,14 +1,10 @@
 package org.back;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class WiseSayingService {
 
-    private final WiseSayingRepository wiseSayingRepository = WiseSayingRepository.getInstance();
+    private final WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
 
     public Long register(String wiseSaying, String author){
         WiseSaying entity = new WiseSaying(wiseSaying, author);

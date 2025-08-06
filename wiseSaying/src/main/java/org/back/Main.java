@@ -13,7 +13,8 @@ public class Main {
     private static final Path id_path = Paths.get("./db/wiseSaying/lastId.txt");
     private static Long id;
     public static void main(String[] args) throws IOException {
-        App.run();
+        App app = new App();
+        app.run();
 //        if(Files.exists(id_path)){
 //            id = Long.parseLong(Files.readString(id_path));
 //        }else{

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-08-06T03:21:17" hostname="bagtaewon-ui-noteubug.local" time="0.05">
+<testsuite name="AppTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-08-06T05:33:21" hostname="bagtaewon-ui-noteubug.local" time="0.066">
   <properties/>
-  <testcase name="수정()" classname="AppTest" time="0.05"/>
+  <testcase name="등록()" classname="AppTest" time="0.047"/>
+  <testcase name="목록()" classname="AppTest" time="0.008"/>
+  <testcase name="삭제()" classname="AppTest" time="0.002"/>
+  <testcase name="수정()" classname="AppTest" time="0.006"/>
   <system-out><![CDATA[모든 파일 삭제 완료!
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

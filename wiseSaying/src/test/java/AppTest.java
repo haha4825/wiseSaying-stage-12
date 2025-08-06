@@ -8,14 +8,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import org.back.App;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AppTest {
 
+    static App app;
+    static ByteArrayOutputStream out;
+
+
     @BeforeEach
     void beforeEach() {
-        Path dirPath = Paths.get("/Users/taewon/self/dev-course/명언게시판/wiseSaying/db/wiseSaying");
+        Path dirPath = Paths.get("db/wiseSaying");
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (Path file : stream) {
@@ -25,6 +30,13 @@ public class AppTest {
         } catch (IOException e) {
             System.err.println("삭제 중 오류 발생: " + e.getMessage());
         }
+        app = new App();
+        out = TestUtil.setOutToByteArray();
+    }
+
+    @AfterEach
+    void afterEach() {
+        TestUtil.clearSetOutToByteArray(out);
     }
 
     @Test
@@ -35,9 +47,8 @@ public class AppTest {
             작자미상
             종료
             """);
-        App.sc = sc;
-        ByteArrayOutputStream out = TestUtil.setOutToByteArray();
-        App.run();
+        app.setSc(sc);
+        app.run();
         String output = out.toString();
         assertThat(output)
             .contains("명언 :")
@@ -54,9 +65,8 @@ public class AppTest {
             목록
             종료
             """);
-        App.sc = sc;
-        ByteArrayOutputStream out = TestUtil.setOutToByteArray();
-        App.run();
+        app.setSc(sc);
+        app.run();
         String output = out.toString();
         assertThat(output)
             .contains("""
@@ -77,9 +87,8 @@ public class AppTest {
             삭제?id=1
             종료
             """);
-        App.sc = sc;
-        ByteArrayOutputStream out = TestUtil.setOutToByteArray();
-        App.run();
+        app.setSc(sc);
+        app.run();
         String output = out.toString();
         assertThat(output)
             .contains("""
@@ -104,9 +113,8 @@ public class AppTest {
             수정?id=2
             종료
             """);
-        App.sc = sc;
-        ByteArrayOutputStream out = TestUtil.setOutToByteArray();
-        App.run();
+        app.setSc(sc);
+        app.run();
         String output = out.toString();
         assertThat(output)
             .contains("""
@@ -116,8 +124,5 @@ public class AppTest {
             .contains("1 / 홍길동 / 현재와 자신을 사랑하라.")
             .contains("2번 명언은 존재하지 않습니다.");
     }
-
-
-
-
 }
+

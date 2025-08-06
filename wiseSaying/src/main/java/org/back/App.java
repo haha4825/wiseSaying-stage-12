@@ -6,10 +6,14 @@ import java.util.Scanner;
 
 public class App {
 
-    private static final WiseSayingController wiseSayingController = new WiseSayingController();
-    public static Scanner sc = new Scanner(System.in);
+    private  final WiseSayingController wiseSayingController = new WiseSayingController();
+    public  Scanner sc = new Scanner(System.in);
 
-    public static void run() throws IOException {
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public  void run() throws IOException {
 
         System.out.println("== 명언 앱 ==");
 
@@ -43,8 +47,8 @@ public class App {
             } else if (command.startsWith("수정")) {
                 String[] split = command.split("=");
                 Long id = Long.parseLong(split[1]);
-                if(wiseSayingController.existById(id)){
-                    WiseSaying wiseSaying = wiseSayingController.readWiseSaying(id);
+                WiseSaying wiseSaying = wiseSayingController.readWiseSaying(id);
+                if(wiseSaying != null){
                     System.out.println("명언(기존) : " + wiseSaying.getSaying());
                     System.out.print("명언 : ");
                     String newSaying = sc.nextLine();
@@ -63,7 +67,7 @@ public class App {
         close();
     }
 
-    public static void close() {
+    public  void close() {
         WiseSayingRepository.close();
         System.out.println("명령) 종료");
     }

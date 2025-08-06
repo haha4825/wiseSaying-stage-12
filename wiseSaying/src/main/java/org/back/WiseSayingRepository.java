@@ -15,11 +15,24 @@ public class WiseSayingRepository {
     private static final Path id_path = Paths.get("./db/wiseSaying/lastId.txt");
     private static Long id;
 
-    private static final WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
-
-    public static WiseSayingRepository getInstance(){
-        return wiseSayingRepository;
+    public WiseSayingRepository() {
+        try {
+            if (Files.exists(id_path)) {
+                id = Long.parseLong(Files.readString(id_path));
+            } else {
+                id = 1L;
+            }
+        } catch (IOException e) {
+            System.out.println("레포지토리 id 초기화 실패");
+            e.printStackTrace();
+        }
     }
+
+//    private static final WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
+//    public static WiseSayingRepository getInstance(){
+//        return wiseSayingRepository;
+
+//    }
 
 
     public Long save(WiseSaying entity) {
@@ -109,19 +122,6 @@ public class WiseSayingRepository {
             return id;
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private WiseSayingRepository() {
-        try {
-            if (Files.exists(id_path)) {
-                id = Long.parseLong(Files.readString(id_path));
-            } else {
-                id = 1L;
-            }
-        } catch (IOException e) {
-            System.out.println("레포지토리 id 초기화 실패");
-            e.printStackTrace();
         }
     }
 
